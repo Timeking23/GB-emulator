@@ -15,6 +15,9 @@ Vert Sync    - 59.73 Hz (61.17 Hz for SGB)
 ## resources
 https://emudev.de/gameboy-emulator/overview/
 https://gekkio.fi/files/gb-docs/gbctr.pdf
-
+https://www.youtube.com/watch?v=HyzD8pNlpwI
 ## Dev Logs
-log 1: learn the inner workings and create a skeleton
+log 1: wanted to learn NES first, but decided to do 8-Bit instead to get 
+the basics down
+
+current task: learn the inner workings and create a skeleton
