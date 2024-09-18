@@ -4,9 +4,11 @@
 //  Max # of Sprites: 40
 //  Max # of Sprites/line: 10
 //  Clock speed: 4.194304 MHz
+#pragma once
 #include <cstdint>
 #include "Bus.h"
-
+#include <string>
+#include <vector>
 
 // Forward declaration of generic communications bus class to
 // prevent circular inclusions
@@ -27,15 +29,11 @@ public:
     //Contains information about the result of the most recent instruction
     //that has affected flags.
 
-    void reset();	// Reset Interrupt - Forces CPU into known state
-	void irq();		// Interrupt Request - Executes an instruction at a specific location
-	void nmi();		// Non-Maskable Interrupt Request - As above, but cannot be disabled
-	void clock();	// Perform one clock cycle's worth of update
-    
-    // Indicates the current instruction has completed by returning true. This is
-	// a utility function to enable "step-by-step" execution, without manually 
-	// clocking every cycle
-	bool complete();
+    void reset();     // Reset CPU state
+    void irq();       // Interrupt Request
+    void nmi();       // Non-Maskable Interrupt Request
+    void clock();     // Execute one clock cycle
+    bool complete();  // Check if current instruction is complete
 
     // Link this CPU to a communications bus
 	void ConnectBus(Bus *n) { bus = n; }
@@ -68,8 +66,8 @@ public:
 //either as one 16-bit register, or as two separate 8-bit registers.
 
 private:
-    uint8_t GetFlag(FLAGS6502 f);
-	void    SetFlag(FLAGS6502 f, bool v);
+    uint8_t GetFlag(ALUFlag f);
+    void SetFlag(ALUFlag f, bool v);
 	
 	// Assisstive variables to facilitate emulation
 	uint8_t  fetched     = 0x00;   // Represents the working input value to the ALU
