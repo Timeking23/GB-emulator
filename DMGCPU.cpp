@@ -3,7 +3,11 @@
 
 DMGCPU::DMGCPU()
 {
-    
+    using a = DMGCPU;
+	lookup = 
+	{   
+        
+    }
 };
 DMGCPU::~DMGCPU()
 {
