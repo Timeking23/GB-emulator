@@ -22,7 +22,7 @@ public:
     enum ALUFlag : uint8_t //(Arithmetic Logic Unit) part of Register F
     {//flag = (1 byte, 7th position) pos stars with 0-7, to make 8bytes ex.below
         z = (1 << 7), //Zero flag          [7-bits] 0b10000000 
-        n = (1 << 6), //Subtraction flah   [6-bits] 0b01000000
+        n = (1 << 6), //Subtraction flag  [6-bits] 0b01000000
         h = (1 << 5), //Half Carry flag    [5-bits] 0b00100000
         c = (1 << 4) //Carry flag          [4-bits] 0b00010000
     };
@@ -84,20 +84,24 @@ private:
 	void    write(uint16_t a, uint8_t d);
 
 
-    struct INSTRUCTION
-	{
-		std::string name;		
-		uint8_t     (DMGCPU::*operate )(void) = nullptr;
-		uint8_t     (DMGCPU::*addrmode)(void) = nullptr;
-		uint8_t     cycles = 0;
-	};
-    	vector<INSTRUCTION> lookup;
-private:
+    struct INSTRUCTION {
+    std::string name;
+    uint16_t (DMGCPU::*operate)(); // Pointer to the operation
+    uint8_t cycles; // Number of cycles
+    };
 
-    //todo:
-    // Addressing Modes =============================================
+    	std::vector<INSTRUCTION> lookup;
+    
 
 private:
-    //todo:
     // Opcodes ======================================================
+    uint16_t NOP(); uint16_t LD_BC_u16(); uint16_t LD_BC_A(); uint16_t BC();
+    uint16_t INC_B(); uint16_t DEC_B(); uint16_t LD_B_u8(); uint16_t RLCA();
+    uint16_t RLA(); uint16_t JR0(); uint16_t RRA(); uint16_t DAA();
+    uint16_t CPL(); uint16_t CFF(); uint16_t HAT(); uint16_t ADC();
+    uint16_t SUB(); uint16_t SBC(); uint16_t AND(); uint16_t XOR();
+    uint16_t OR0(); uint16_t CP0(); uint16_t RET(); uint16_t POP();
+    uint16_t CAL(); uint16_t JP0(); uint16_t PUH(); uint16_t RST();
+    uint16_t PRE(); uint16_t REI(); uint16_t DI0(); uint16_t EI0();
+
 };
